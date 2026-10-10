@@ -1,0 +1,19 @@
+{
+  "name": "lapkeu_2025",
+  "version": "1.0.0",
+  "description": "Sistem Laporan Keuangan, Laba Rugi, dan Neraca Bengkel Shop&Drive Grand Wisata Baru Tahun 2025",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "laporan-keuangan",
+    "laba-rugi",
+    "neraca",
+    "shop-and-drive",
+    "bengkel",
+    "financial-dashboard"
+  ],
+  "author": "Shop&Drive Grand Wisata Bekasi",
+  "license": "ISC"
+}

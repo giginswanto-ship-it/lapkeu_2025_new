@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  lapkeu_2025:
+    build: .
+    container_name: lapkeu_shop_and_drive_2025
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production

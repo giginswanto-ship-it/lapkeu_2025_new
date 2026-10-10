@@ -1,0 +1,63 @@
+{
+  "entitas": {
+    "kode_outlet": "0681",
+    "nama": "SHOP&DRIVE Grand Wisata Baru, Bekasi",
+    "tanggal_neraca": "31 Desember 2025",
+    "mata_uang": "IDR",
+    "status": "Balanced (Aset = Liabilitas + Ekuitas)"
+  },
+  "aktiva_aset": {
+    "aset_lancar": {
+      "kas_dan_bank": 195834434,
+      "piutang_usaha_edc_settlement": 25000000,
+      "persediaan_barang_dagang": {
+        "total": 320000000,
+        "rincian": {
+          "aki_gs_astra_incoe": 130000000,
+          "oli_mesin_shell_castrol_mobil1": 95000000,
+          "shock_absorber_kyb_dan_ban": 70000000,
+          "filter_busi_dan_kampas_rem": 25000000
+        }
+      },
+      "sewa_ruko_dibayar_dimuka": 40000000,
+      "total_aset_lancar": 580834434
+    },
+    "aset_tetap": {
+      "peralatan_dan_mesin_bengkel": {
+        "nilai_perolehan": 210000000,
+        "daftar_alat": [
+          "2 Unit Two-Post Car Lift Hidrolik",
+          "Mesin 3D Computerized Spooring Alignment",
+          "Mesin Wheel Balancer & Tire Changer",
+          "Kompresor Angin 5HP & Air Impact Toolset"
+        ]
+      },
+      "renovasi_ruko_dan_signage_astra": 75000000,
+      "akumulasi_penyusutan": -75000000,
+      "nilai_buku_aset_tetap": 210000000
+    },
+    "total_aktiva": 790834434
+  },
+  "pasiva_kewajiban_dan_ekuitas": {
+    "liabilitas_lancar": {
+      "utang_usaha_astra_otoparts": 180000000,
+      "utang_pajak_ppn_pph": 28500000,
+      "beban_akrual_dan_gaji": 16500000,
+      "total_liabilitas_lancar": 225000000
+    },
+    "ekuitas": {
+      "modal_awal_disetor": 500000000,
+      "laba_tahun_berjalan_2025": 65834434,
+      "prive_penarikan_pemilik": 0,
+      "total_ekuitas_modal_akhir": 565834434
+    },
+    "total_pasiva": 790834434
+  },
+  "rasio_keuangan": {
+    "current_ratio": 2.58,
+    "debt_to_equity_ratio_persen": 39.76,
+    "return_on_equity_persen": 13.17,
+    "return_on_assets_persen": 8.32,
+    "inventory_turnover": 8.97
+  }
+}

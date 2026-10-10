@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Laba Rugi & Neraca 2025 - Bengkel Shop&Drive Grand Wisata</title>
+  <style>
+    :root {
+      --primary: #005691;
+      --primary-dark: #003a61;
+      --primary-light: #e6f0fa;
+      --accent: #f26522;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #f1f5f9; color: var(--gray-800); line-height: 1.5; padding: 20px; }
+    .container { max-width: 1300px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #005691 0%, #002d4c 100%);
+      color: white;
+      padding: 24px 28px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-title h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .header-title p { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+    .badge {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 2px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 10px 18px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .control-group {
+      background: var(--gray-50);
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+    }
+    .control-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .control-value { color: var(--primary); font-weight: 700; }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: var(--gray-300);
+      outline: none;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .toggle-group {
+      display: flex;
+      background: var(--gray-200);
+      border-radius: 8px;
+      padding: 3px;
+      margin-top: 6px;
+    }
+    .toggle-opt {
+      flex: 1;
+      text-align: center;
+      padding: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle-opt.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* KPI Summary Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: white;
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+    }
+    .kpi-card.accent::before { background: var(--accent); }
+    .kpi-card.success::before { background: var(--success); }
+    .kpi-card.warning::before { background: var(--warning); }
+    .kpi-label { font-size: 12px; font-weight: 600; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-val { font-size: 22px; font-weight: 800; color: var(--gray-900); margin: 6px 0 2px 0; }
+    .kpi-sub { font-size: 12px; color: var(--gray-600); }
+
+    /* Visual Chart */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 900px) {
+      .charts-grid { grid-template-columns: 1fr; }
+    }
+    .chart-container {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    .chart-svg {
+      width: 100%;
+      height: 260px;
+    }
+
+    /* Table */
+    .table-container {
+      background: white;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    th {
+      background: var(--gray-100);
+      color: var(--gray-700);
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--gray-200);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--gray-200);
+      white-space: nowrap;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr.total-row {
+      background: var(--primary-light);
+      font-weight: 800;
+      color: var(--primary-dark);
+      border-top: 2px solid var(--primary);
+    }
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+    .tag {
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .tag-peak { background: #fee2e2; color: #b91c1c; }
+    .tag-low { background: #fef3c7; color: #b45309; }
+    .tag-normal { background: #e0f2fe; color: #0369a1; }
+
+    /* Formal Statement & Neraca View */
+    .statement-sheet {
+      background: white;
+      padding: 40px;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    .statement-header {
+      text-align: center;
+      border-bottom: 3px double var(--gray-700);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    .statement-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 14px;
+      border-bottom: 1px dashed var(--gray-200);
+    }
+    .statement-row.header-sec {
+      font-weight: 700;
+      color: var(--primary-dark);
+      border-bottom: 1px solid var(--gray-400);
+      margin-top: 12px;
+      padding-top: 8px;
+      background: var(--gray-50);
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .statement-row.indent { padding-left: 24px; color: var(--gray-700); }
+    .statement-row.subtotal {
+      font-weight: 700;
+      border-bottom: 1px solid var(--gray-700);
+      border-top: 1px solid var(--gray-300);
+      padding: 8px 0;
+    }
+    .statement-row.grand-total {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      border-bottom: 3px double var(--gray-800);
+      border-top: 2px solid var(--gray-800);
+      padding: 10px 0;
+      margin-top: 8px;
+    }
+
+    /* Neraca Scontro Grid */
+    .neraca-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    @media (max-width: 820px) {
+      .neraca-grid { grid-template-columns: 1fr; }
+    }
+    .neraca-col {
+      background: white;
+      border-radius: 10px;
+      border: 1px solid var(--gray-300);
+      padding: 18px;
+    }
+    .neraca-col-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .neraca-sec-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+      background: var(--gray-100);
+      padding: 6px 8px;
+      margin: 12px 0 6px 0;
+      border-radius: 4px;
+    }
+    .neraca-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 5px 8px;
+      border-bottom: 1px dashed var(--gray-200);
+    }
+    .neraca-item-sub {
+      font-size: 11px;
+      color: var(--gray-600);
+      padding-left: 8px;
+      margin-bottom: 2px;
+    }
+    .neraca-subtotal {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px;
+      background: #f8fafc;
+      border-top: 1px solid var(--gray-300);
+      border-bottom: 1px solid var(--gray-300);
+      margin-top: 6px;
+    }
+    .neraca-total-box {
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--primary-light);
+      border-radius: 8px;
+      border: 2px solid var(--primary);
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--primary-dark);
+    }
+    .balance-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: 700;
+      font-size: 13px;
+      border-radius: 999px;
+      border: 1px solid #86efac;
+    }
+
+    /* Signatures */
+    .signature-grid {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      padding-top: 16px;
+    }
+    .sig-box {
+      text-align: center;
+      width: 260px;
+    }
+    .sig-space { height: 70px; }
+    .sig-name { font-weight: 700; border-top: 1px solid var(--gray-800); padding-top: 4px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: var(--primary-dark); }
+    .btn-secondary { background: white; color: var(--gray-700); border: 1px solid var(--gray-300); }
+    .btn-secondary:hover { background: var(--gray-100); }
+    .action-bar { display: flex; gap: 10px; margin-bottom: 16px; justify-content: flex-end; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .header, .tabs, .card, .action-bar { display: none !important; }
+      .statement-sheet { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+      #tab-statement, #tab-neraca { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header Aplikasi -->
+  <header class="header">
+    <div class="header-title">
+      <h1>Sistem Laporan Keuangan & Neraca Bengkel</h1>
+      <p>0681 - SHOP&DRIVE • Grand Wisata Baru, Bekasi | Periode 01 Jan 2025 – 31 Des 2025</p>
+    </div>
+    <div class="badge">
+      Layanan Ritel & Bengkel Otomotif Astra
+    </div>
+  </header>
+
+  <!-- Panel Navigasi Tab -->
+  <nav class="tabs">
+    <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Ringkasan Eksekutif & KPI</button>
+    <button class="tab-btn" onclick="switchTab('neraca')">⚖️ Menu Neraca Keuangan (Balance Sheet)</button>
+    <button class="tab-btn" onclick="switchTab('statement')">📄 Laporan Laba Rugi Resmi</button>
+    <button class="tab-btn" onclick="switchTab('monthly')">📅 Rincian 12 Bulan (Tabel Lengkap)</button>
+    <button class="tab-btn" onclick="switchTab('simulator')">⚙️ Simulator Dinamis & Biaya Bengkel</button>
+  </nav>
+
+  <!-- KONTEN TAB 1: DASHBOARD RINGKASAN & KPI -->
+  <div id="tab-dashboard">
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Penjualan Bersih (DPP)</div>
+        <div class="kpi-val" id="kpi-dpp">Rp 3,78 M</div>
+        <div class="kpi-sub">Total Bruto: <span id="kpi-bruto">Rp 4,19 M</span> (+PPN 11%)</div>
+      </div>
+      <div class="kpi-card accent">
+        <div class="kpi-label">Laba Kotor Bengkel (24%)</div>
+        <div class="kpi-val" id="kpi-laba-kotor">Rp 906,5 Jt</div>
+        <div class="kpi-sub">Margin Kotor: <span id="kpi-margin-pct">24,00%</span></div>
+      </div>
+      <div class="kpi-card warning">
+        <div class="kpi-label">Management Fee (3%)</div>
+        <div class="kpi-val" id="kpi-mgmt-fee">Rp 125,8 Jt</div>
+        <div class="kpi-sub">Basis: <span id="kpi-fee-basis">Gross Bruto (+PPN)</span></div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-label">Laba Bersih Tahun 2025</div>
+        <div class="kpi-val" id="kpi-laba-bersih" style="color: var(--success);">Rp 65,8 Jt</div>
+        <div class="kpi-sub">Net Profit Margin: <span id="kpi-npm">1,74%</span></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Modal Awal Disetor</div>
+        <div class="kpi-val" id="kpi-modal-awal">Rp 500 Jt</div>
+        <div class="kpi-sub">Ekuitas Awal Pemilik Toko</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Total Aset Neraca</div>
+        <div class="kpi-val" id="kpi-total-aset" style="color:var(--primary);">Rp 790,8 Jt</div>
+        <div class="kpi-sub">Status: <span style="color:var(--success); font-weight:700;">Balance 100%</span></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Modal Akhir (Equity)</div>
+        <div class="kpi-val" id="kpi-modal-akhir">Rp 565,8 Jt</div>
+        <div class="kpi-sub">Pertumbuhan Modal: <span id="kpi-modal-grow" style="color:var(--success); font-weight:700;">+13,17%</span></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Return on Equity (ROE)</div>
+        <div class="kpi-val" id="kpi-roe" style="color: var(--primary);">13,17%</div>
+        <div class="kpi-sub">Imbal Hasil Modal Bengkel</div>
+      </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="charts-grid">
+      <div class="chart-container">
+        <div class="card-title">
+          <span>📈 Tren Penjualan & Laba Bulanan Bengkel 2025 (Juta Rupiah)</span>
+        </div>
+        <svg class="chart-svg" id="monthly-chart" viewBox="0 0 760 260"></svg>
+        <div style="display:flex; justify-content:center; gap:20px; font-size:12px; margin-top:8px;">
+          <span style="display:inline-flex; align-items:center; gap:5px;"><span style="width:12px; height:12px; background:var(--primary); border-radius:3px; display:inline-block;"></span> Penjualan Bersih (DPP)</span>
+          <span style="display:inline-flex; align-items:center; gap:5px;"><span style="width:12px; height:12px; background:var(--accent); border-radius:3px; display:inline-block;"></span> Laba Kotor Bengkel</span>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="card-title">
+          <span>🍰 Alokasi Hasil Penjualan Bengkel</span>
+        </div>
+        <svg class="chart-svg" id="donut-chart" viewBox="0 0 280 260"></svg>
+        <div style="font-size:12px; line-height: 1.8; margin-top:4px;" id="revenue-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTEN TAB 2: MENU NERACA KEUANGAN (BALANCE SHEET) -->
+  <div id="tab-neraca" style="display:none;">
+    <div class="action-bar">
+      <span class="balance-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        Status Neraca: SEIMBANG (ASET = LIABILITAS + EKUITAS)
+      </span>
+      <button class="btn btn-secondary" onclick="exportToCSV()">📥 Ekspor Data</button>
+      <button class="btn" onclick="window.print()">🖨️ Cetak Neraca Resmi</button>
+    </div>
+
+    <div class="statement-sheet">
+      <div class="statement-header">
+        <h2 style="font-size:20px; font-weight:800; color:#005691; letter-spacing:0.5px;">SHOP&DRIVE • GRAND WISATA BARU, BEKASI</h2>
+        <div style="font-size:13px; font-weight:600; color:var(--gray-600); margin-top:2px;">No. Outlet: 0681 | Bengkel Ritel Otomotif & Fast Moving Parts</div>
+        <h3 style="font-size:17px; font-weight:800; margin-top:10px; color:var(--gray-900);">NERACA KEUANGAN (BALANCE SHEET)</h3>
+        <div style="font-size:13px; color:var(--gray-600);">Per 31 Desember 2025 (Dinyatakan dalam Rupiah Penuh - IDR)</div>
+      </div>
+
+      <!-- Format Scontro (Aset Kiri, Kewajiban & Ekuitas Kanan) -->
+      <div class="neraca-grid">
+        <!-- SISI KIRI: AKTIVA / ASET -->
+        <div class="neraca-col">
+          <div class="neraca-col-title">I. AKTIVA / ASET</div>
+
+          <div class="neraca-sec-title">A. ASET LANCAR (CURRENT ASSETS)</div>
+          <div class="neraca-item">
+            <span>Kas di Toko & Bank Operasional</span>
+            <span id="neraca-kas">Rp 195.834.434</span>
+          </div>
+          <div class="neraca-item-sub">• Rekening Giro Operasional & Saldo Kasir</div>
+
+          <div class="neraca-item">
+            <span>Piutang Usaha & Merchant Settlement</span>
+            <span>Rp 25.000.000</span>
+          </div>
+          <div class="neraca-item-sub">• Transaksi EDC Kartu Kredit, Debit & QRIS belum cair</div>
+
+          <div class="neraca-item">
+            <span>Persediaan Barang Dagang (Stock Opname)</span>
+            <span>Rp 320.000.000</span>
+          </div>
+          <div class="neraca-item-sub">• Aki GS Astra / Incoe: Rp 130.000.000</div>
+          <div class="neraca-item-sub">• Oli Mesin & Transmisi (Astra Shell, Castrol, Mobil1): Rp 95.000.000</div>
+          <div class="neraca-item-sub">• Shock Absorber (KYB / Kayaba) & Ban: Rp 70.000.000</div>
+          <div class="neraca-item-sub">• Filter Udara, Oli, Kampas Rem & Busi: Rp 25.000.000</div>
+
+          <div class="neraca-item">
+            <span>Sewa Tempat Ruko Dibayar Dimuka</span>
+            <span>Rp 40.000.000</span>
+          </div>
+          <div class="neraca-item-sub">• Sisa sewa ruko 4 bulan ke depan</div>
+
+          <div class="neraca-subtotal">
+            <span>Total Aset Lancar</span>
+            <span id="neraca-total-al">Rp 580.834.434</span>
+          </div>
+
+          <div class="neraca-sec-title">B. ASET TETAP BENGKEL (FIXED ASSETS)</div>
+          <div class="neraca-item">
+            <span>Peralatan & Mesin Bengkel Shop&Drive</span>
+            <span>Rp 210.000.000</span>
+          </div>
+          <div class="neraca-item-sub">• 2 Unit Two-Post Car Lift Hidrolik</div>
+          <div class="neraca-item-sub">• Mesin 3D Computerized Spooring Alignment</div>
+          <div class="neraca-item-sub">• Mesin Wheel Balancer & Tire Changer</div>
+          <div class="neraca-item-sub">• Kompresor Angin 5HP & Air Impact Toolset</div>
+
+          <div class="neraca-item">
+            <span>Renovasi Ruko, Neon Sign & Rak Toko</span>
+            <span>Rp 75.000.000</span>
+          </div>
+
+          <div class="neraca-item" style="color:#b91c1c;">
+            <span>Akumulasi Penyusutan Aset Tetap</span>
+            <span>(Rp 75.000.000)</span>
+          </div>
+
+          <div class="neraca-subtotal">
+            <span>Nilai Buku Aset Tetap</span>
+            <span>Rp 210.000.000</span>
+          </div>
+
+          <div class="neraca-total-box">
+            <span>TOTAL AKTIVA / ASET</span>
+            <span id="neraca-total-aset">Rp 790.834.434</span>
+          </div>
+        </div>
+
+        <!-- SISI KANAN: KEWAJIBAN & EKUITAS -->
+        <div class="neraca-col">
+          <div class="neraca-col-title">II. PASIVA (KEWAJIBAN & EKUITAS)</div>
+
+          <div class="neraca-sec-title">A. LIABILITAS JANGKA PENDEK (CURRENT LIABILITIES)</div>
+          <div class="neraca-item">
+            <span>Utang Usaha ke Distributor (Astra Otoparts)</span>
+            <span>Rp 180.000.000</span>
+          </div>
+          <div class="neraca-item-sub">• Pembelian aki, oli, ban & sparepart (termin 30 hari)</div>
+
+          <div class="neraca-item">
+            <span>Utang Pajak (PPN & PPh Terutang)</span>
+            <span>Rp 28.500.000</span>
+          </div>
+          <div class="neraca-item-sub">• PPN Keluaran Des & PPh Final disetor bulan Jan</div>
+
+          <div class="neraca-item">
+            <span>Beban Akrual Masih Harus Dibayar</span>
+            <span id="neraca-utang-fee">Rp 16.500.000</span>
+          </div>
+          <div class="neraca-item-sub">• Gaji teknisi & Management Fee bulan berjalan</div>
+
+          <div class="neraca-subtotal">
+            <span>Total Liabilitas Lancar</span>
+            <span id="neraca-total-liabilitas">Rp 225.000.000</span>
+          </div>
+
+          <div class="neraca-sec-title">B. EKUITAS / MODAL PEMILIK (OWNER'S EQUITY)</div>
+          <div class="neraca-item">
+            <span>Modal Awal Disetor Pemilik Toko</span>
+            <span id="neraca-modal-awal">Rp 500.000.000</span>
+          </div>
+          <div class="neraca-item-sub">• Modal awal pendirian gerai bengkel Shop&Drive</div>
+
+          <div class="neraca-item" style="color:var(--success); font-weight:700;">
+            <span>Laba Tahun Berjalan 2025 (Net Profit)</span>
+            <span id="neraca-laba-berjalan">+ Rp 65.834.434</span>
+          </div>
+          <div class="neraca-item-sub">• Laba bersih dari Laporan Rugi Laba tahun 2025</div>
+
+          <div class="neraca-item">
+            <span>Penarikan Modal (Prive / Dividen)</span>
+            <span>(Rp 0)</span>
+          </div>
+          <div class="neraca-item-sub">• Laba ditahan untuk operasional bengkel</div>
+
+          <div class="neraca-subtotal" style="color:var(--primary-dark);">
+            <span>Total Ekuitas / Modal Akhir</span>
+            <span id="neraca-total-ekuitas">Rp 565.834.434</span>
+          </div>
+
+          <div class="neraca-total-box">
+            <span>TOTAL LIABILITAS & EKUITAS</span>
+            <span id="neraca-total-pasiva">Rp 790.834.434</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analisis Rasio Likuiditas & Solvabilitas Neraca -->
+      <div style="margin-top:24px; background:#f8fafc; border:1px solid var(--border-color); border-radius:10px; padding:18px;">
+        <div style="font-weight:800; font-size:14px; color:var(--gray-800); margin-bottom:12px;">
+          📊 ANALISIS KESEHATAN KEUANGAN & NERACA BENGKEL:
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:14px; font-size:13px;">
+          <div style="background:white; padding:12px; border-radius:8px; border:1px solid var(--gray-200);">
+            <div style="color:var(--gray-600); font-size:11px; font-weight:600;">CURRENT RATIO (LIKUIDITAS)</div>
+            <div style="font-size:18px; font-weight:800; color:var(--primary); margin:4px 0;" id="rasio-cr">2,58x</div>
+            <div style="font-size:11px; color:var(--gray-600);">Aset Lancar / Utang Lancar (Sangat Sehat & Likuid, aman di atas 1,5x)</div>
+          </div>
+          <div style="background:white; padding:12px; border-radius:8px; border:1px solid var(--gray-200);">
+            <div style="color:var(--gray-600); font-size:11px; font-weight:600;">DEBT TO EQUITY RATIO (DER)</div>
+            <div style="font-size:18px; font-weight:800; color:var(--accent); margin:4px 0;" id="rasio-der">39,76%</div>
+            <div style="font-size:11px; color:var(--gray-600);">Total Utang / Modal Sendiri (Struktur modal rendah risiko, utang dagang wajar)</div>
+          </div>
+          <div style="background:white; padding:12px; border-radius:8px; border:1px solid var(--gray-200);">
+            <div style="color:var(--gray-600); font-size:11px; font-weight:600;">PERPUTARAN STOK (INVENTORY TURNOVER)</div>
+            <div style="font-size:18px; font-weight:800; color:var(--success); margin:4px 0;">8,97x</div>
+            <div style="font-size:11px; color:var(--gray-600);">Stok aki & oli berputar ~9x setahun (rata-rata lama simpan 40 hari)</div>
+          </div>
+          <div style="background:white; padding:12px; border-radius:8px; border:1px solid var(--gray-200);">
+            <div style="color:var(--gray-600); font-size:11px; font-weight:600;">RETURN ON ASSETS (ROA)</div>
+            <div style="font-size:18px; font-weight:800; color:var(--primary-dark); margin:4px 0;" id="rasio-roa">8,32%</div>
+            <div style="font-size:11px; color:var(--gray-600);">Efisiensi pemanfaatan aset bengkel menghasilkan laba bersih</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tanda Tangan Formal -->
+      <div class="signature-grid">
+        <div class="sig-box">
+          <div style="font-size:13px; color:var(--gray-600); margin-bottom:8px;">Dibuat Oleh:</div>
+          <div class="sig-space"></div>
+          <div class="sig-name">[ Nama Staf / Kasir ]</div>
+          <div style="font-size:12px; color:var(--gray-600);">Bagian Akuntansi Toko</div>
+        </div>
+        <div class="sig-box">
+          <div style="font-size:13px; color:var(--gray-600); margin-bottom:8px;">Mengetahui & Disetujui:</div>
+          <div class="sig-space"></div>
+          <div class="sig-name">[ Nama Kepala Toko / Spv ]</div>
+          <div style="font-size:12px; color:var(--gray-600);">Kepala Toko / Area Coordinator Astra</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTEN TAB 3: FORMAT LAPORAN RESMI LABA RUGI -->
+  <div id="tab-statement" style="display:none;">
+    <div class="action-bar">
+      <button class="btn" onclick="window.print()">🖨️ Cetak Laporan Resmi</button>
+    </div>
+    <div class="statement-sheet">
+      <div class="statement-header">
+        <h2 style="font-size:20px; font-weight:800; color:#005691; letter-spacing:0.5px;">SHOP&DRIVE • GRAND WISATA BARU, BEKASI</h2>
+        <div style="font-size:13px; font-weight:600; color:var(--gray-600); margin-top:2px;">No. Outlet: 0681 | Status Pajak: PKP (Termasuk PPN 11%)</div>
+        <h3 style="font-size:16px; font-weight:700; margin-top:10px; color:var(--gray-900);">LAPORAN LABA RUGI KOMPREHENSIF</h3>
+        <div style="font-size:13px; color:var(--gray-600);">Periode: 01 Januari 2025 s/d 31 Desember 2025</div>
+      </div>
+
+      <div class="statement-row header-sec">
+        <span>PENDAPATAN USAHA BENGKEL (REVENUE)</span>
+        <span>NOMINAL (IDR)</span>
+      </div>
+      <div class="statement-row indent">
+        <span>Penjualan Bruto (Gross Sales Termasuk PPN)</span>
+        <span id="st-bruto">Rp 4.192.544.490</span>
+      </div>
+      <div class="statement-row indent">
+        <span>Dikurangi: Pajak Pertambahan Nilai (PPN Keluaran 11%)</span>
+        <span id="st-ppn">(Rp 415.477.388)</span>
+      </div>
+      <div class="statement-row subtotal">
+        <span>PENJUALAN BERSIH (NET SALES / DPP)</span>
+        <span id="st-dpp">Rp 3.777.067.106</span>
+      </div>
+
+      <div class="statement-row header-sec">
+        <span>HARGA POKOK PENJUALAN (HPP / COGS)</span>
+        <span></span>
+      </div>
+      <div class="statement-row indent">
+        <span>Harga Pokok Barang Dagang (Aki, Oli, Ban, Sparepart) (<span id="st-hpp-pct">76,00%</span>)</span>
+        <span id="st-hpp">(Rp 2.870.571.001)</span>
+      </div>
+      <div class="statement-row subtotal" style="color:var(--primary-dark);">
+        <span>LABA KOTOR BENGKEL (GROSS PROFIT - <span id="st-margin-pct">24,00%</span>)</span>
+        <span id="st-laba-kotor">Rp 906.496.105</span>
+      </div>
+
+      <div class="statement-row header-sec">
+        <span>BEBAN OPERASIONAL (OPERATING EXPENSES)</span>
+        <span></span>
+      </div>
+      <div class="statement-row indent">
+        <span>1. Beban Management Fee (<span id="st-fee-rate">3,00%</span> x <span id="st-fee-src">Gross Bruto</span>)</span>
+        <span id="st-fee">(Rp 125.776.335)</span>
+      </div>
+      <div class="statement-row indent">
+        <span>2. Beban Gaji & Upah Karyawan (Kepala Toko, Kasir, 4 Mekanik + THR)</span>
+        <span id="st-gaji">(Rp 435.500.000)</span>
+      </div>
+      <div class="statement-row indent">
+        <span>3. Beban Sewa Tempat / Ruko Grand Wisata Bekasi</span>
+        <span id="st-sewa">(Rp 120.000.000)</span>
+      </div>
+      <div class="statement-row indent">
+        <span>4. Beban Utilitas (Listrik 3-Phase Kompresor/Lift, Air, POS Astra)</span>
+        <span id="st-utilitas">(Rp 60.000.000)</span>
+      </div>
+      <div class="statement-row indent">
+        <span>5. Beban Perlengkapan & Perawatan Alat Bengkel (Spooring/Balancing)</span>
+        <span id="st-maint">(Rp 25.000.000)</span>
+      </div>
+      <div class="statement-row indent">
+        <span>6. Beban Penyusutan Aset Tetap (Car Lift, Mesin Spooring & Tools)</span>
+        <span id="st-depr">(Rp 37.500.000)</span>
+      </div>
+      <div class="statement-row indent">
+        <span>7. Beban Administrasi, Promosi Lokal & Kebersihan</span>
+        <span id="st-adm">(Rp 18.000.000)</span>
+      </div>
+      <div class="statement-row subtotal">
+        <span>TOTAL BEBAN OPERASIONAL BENGKEL (OPEX)</span>
+        <span id="st-total-opex">(Rp 821.776.335)</span>
+      </div>
+
+      <div class="statement-row subtotal" style="background:#f8fafc; padding:10px 8px;">
+        <span style="font-weight:800;">LABA USAHA OPERASIONAL (EBIT)</span>
+        <span id="st-ebit" style="font-weight:800; color:var(--primary);">Rp 84.719.770</span>
+      </div>
+
+      <div class="statement-row header-sec">
+        <span>PAJAK PENGHASILAN</span>
+        <span></span>
+      </div>
+      <div class="statement-row indent">
+        <span>Beban PPh (<span id="st-pajak-rate">0,5%</span> x Omzet DPP)</span>
+        <span id="st-pajak">(Rp 18.885.336)</span>
+      </div>
+
+      <div class="statement-row grand-total">
+        <span>LABA BERSIH TAHUN BERJALAN (NET PROFIT / EAT)</span>
+        <span id="st-eat">Rp 65.834.434</span>
+      </div>
+
+      <!-- Ekuitas Modal -->
+      <div style="margin-top:28px; background:#f1f5f9; padding:14px; border-radius:8px; font-size:13px;">
+        <div style="font-weight:700; margin-bottom:6px; color:var(--gray-800);">IKHTISAR PERUBAHAN MODAL:</div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <span>Modal Awal Disetor:</span>
+          <span style="font-weight:600;" id="st-modal-awal">Rp 500.000.000</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <span>Laba Bersih Tahun 2025:</span>
+          <span style="font-weight:600; color:var(--success);" id="st-modal-laba">+ Rp 65.834.434</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; border-top:1px solid var(--gray-300); padding-top:4px; font-weight:700;">
+          <span>Modal Akhir per 31 Des 2025:</span>
+          <span id="st-modal-akhir">Rp 565.834.434</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:4px; color:var(--primary-dark); font-weight:700;">
+          <span>Return on Equity (ROE):</span>
+          <span id="st-roe-pct">13,17%</span>
+        </div>
+      </div>
+
+      <!-- Tanda Tangan Formal -->
+      <div class="signature-grid">
+        <div class="sig-box">
+          <div style="font-size:13px; color:var(--gray-600); margin-bottom:8px;">Dibuat Oleh:</div>
+          <div class="sig-space"></div>
+          <div class="sig-name">[ Nama Staf / Kasir ]</div>
+          <div style="font-size:12px; color:var(--gray-600);">Administrasi Toko</div>
+        </div>
+        <div class="sig-box">
+          <div style="font-size:13px; color:var(--gray-600); margin-bottom:8px;">Mengetahui & Disetujui:</div>
+          <div class="sig-space"></div>
+          <div class="sig-name">[ Nama Kepala Toko / Spv ]</div>
+          <div style="font-size:12px; color:var(--gray-600);">Kepala Toko / Area Coordinator</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTEN TAB 4: TABEL 12 BULAN LENGKAP -->
+  <div id="tab-monthly" style="display:none;">
+    <div class="action-bar">
+      <button class="btn btn-secondary" onclick="exportToCSV()">📥 Unduh CSV (Excel)</button>
+      <button class="btn" onclick="window.print()">🖨️ Cetak Dokumen</button>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center">No</th>
+            <th>Bulan</th>
+            <th class="text-right">Penjualan (DPP)</th>
+            <th class="text-right">PPN 11%</th>
+            <th class="text-right">Penjualan + PPN</th>
+            <th class="text-right">HPP (76%)</th>
+            <th class="text-right">Laba Kotor (24%)</th>
+            <th class="text-right">Mgmt Fee (3%)</th>
+            <th class="text-right">Laba Stl Fee</th>
+            <th class="text-center">Keterangan</th>
+          </tr>
+        </thead>
+        <tbody id="monthly-table-body"></tbody>
+        <tfoot>
+          <tr class="total-row" id="monthly-table-total"></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- KONTEN TAB 5: SIMULATOR DINAMIS -->
+  <div id="tab-simulator" style="display:none;">
+    <div class="card">
+      <div class="card-title">
+        <span>🎛️ Parameter Interaktif (Ubah Nilai Slider untuk Simulasi Dinamis)</span>
+      </div>
+      <div class="controls-grid">
+        <div class="control-group">
+          <div class="control-label">
+            <span>Margin Kotor Bengkel:</span>
+            <span class="control-value" id="val-margin">24%</span>
+          </div>
+          <input type="range" id="input-margin" min="15" max="35" step="0.5" value="24" oninput="updateAll()">
+          <div style="font-size:11px; color:var(--gray-600); margin-top:4px;">Mengatur pembagian Laba Kotor vs HPP.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Management Fee:</span>
+            <span class="control-value" id="val-mgmt-fee">3.0%</span>
+          </div>
+          <input type="range" id="input-mgmt-fee" min="0" max="10" step="0.5" value="3.0" oninput="updateAll()">
+          <div class="toggle-group">
+            <div class="toggle-opt active" id="basis-bruto" onclick="setFeeBasis('bruto')">Dari Gross Bruto</div>
+            <div class="toggle-opt" id="basis-dpp" onclick="setFeeBasis('dpp')">Dari Gross DPP</div>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Modal Awal (Disetor):</span>
+            <span class="control-value" id="val-modal">Rp 500 Juta</span>
+          </div>
+          <input type="range" id="input-modal" min="200" max="1500" step="50" value="500" oninput="updateAll()">
+          <div style="font-size:11px; color:var(--gray-600); margin-top:4px;">Digunakan untuk kalkulasi rasio ROE & Neraca.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Tarif Pajak PPh:</span>
+            <span class="control-value" id="val-pajak">0.5% (UMKM PP 55)</span>
+          </div>
+          <input type="range" id="input-pajak" min="0" max="5" step="0.25" value="0.5" oninput="updateAll()">
+          <div style="font-size:11px; color:var(--gray-600); margin-top:4px;">Persentase pajak atas peredaran bruto.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🏢 Beban Operasional Bengkel Tahunan (Dapat Diubah)</span>
+      </div>
+      <div class="controls-grid">
+        <div class="control-group">
+          <div class="control-label">
+            <span>Beban Gaji Mekanik & Staf:</span>
+            <span class="control-value" id="val-gaji">Rp 435,5 Juta</span>
+          </div>
+          <input type="range" id="input-gaji" min="200" max="700" step="10" value="435.5" oninput="updateAll()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Sewa Ruko Grand Wisata / Thn:</span>
+            <span class="control-value" id="val-sewa">Rp 120,0 Juta</span>
+          </div>
+          <input type="range" id="input-sewa" min="50" max="250" step="5" value="120" oninput="updateAll()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Utilitas (Listrik 3-Phase/Air):</span>
+            <span class="control-value" id="val-utilitas">Rp 60,0 Juta</span>
+          </div>
+          <input type="range" id="input-utilitas" min="20" max="150" step="5" value="60" oninput="updateAll()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Perawatan Lift & Mesin Spooring:</span>
+            <span class="control-value" id="val-maint">Rp 25,0 Juta</span>
+          </div>
+          <input type="range" id="input-maint" min="10" max="80" step="5" value="25" oninput="updateAll()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Penyusutan Peralatan Bengkel:</span>
+            <span class="control-value" id="val-depr">Rp 37,5 Juta</span>
+          </div>
+          <input type="range" id="input-depr" min="0" max="100" step="5" value="37.5" oninput="updateAll()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Administrasi & Lain-lain:</span>
+            <span class="control-value" id="val-adm">Rp 18,0 Juta</span>
+          </div>
+          <input type="range" id="input-adm" min="5" max="60" step="2" value="18" oninput="updateAll()">
+        </div>
+      </div>
+      <div style="margin-top:14px; text-align:right;">
+        <button class="btn btn-secondary" onclick="resetDefaults()">🔄 Reset ke Parameter Awal</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const salesData = [
+    { no: 1,  bulan: "Januari",   dpp: 334294267, ppn: 36772370, bruto: 371066636, ket: "Normal" },
+    { no: 2,  bulan: "Februari",  dpp: 267025622, ppn: 29372819, bruto: 296398441, ket: "Normal" },
+    { no: 3,  bulan: "Maret",     dpp: 398734596, ppn: 43860806, bruto: 442595403, ket: "Tertinggi" },
+    { no: 4,  bulan: "April",     dpp: 253609235, ppn: 27897016, bruto: 281506251, ket: "Terendah" },
+    { no: 5,  bulan: "Mei",       dpp: 332648938, ppn: 36591384, bruto: 369240321, ket: "Normal" },
+    { no: 6,  bulan: "Juni",      dpp: 318777983, ppn: 35065579, bruto: 353843561, ket: "Normal" },
+    { no: 7,  bulan: "Juli",      dpp: 291149361, ppn: 32026430, bruto: 323175791, ket: "Normal" },
+    { no: 8,  bulan: "Agustus",   dpp: 328676415, ppn: 36154406, bruto: 364830821, ket: "Normal" },
+    { no: 9,  bulan: "September", dpp: 287211632, ppn: 31593280, bruto: 318804912, ket: "Normal" },
+    { no: 10, bulan: "Oktober",   dpp: 327504451, ppn: 36025490, bruto: 363529941, ket: "Normal" },
+    { no: 11, bulan: "November",  dpp: 300880614, ppn: 33096868, bruto: 333977482, ket: "Normal" },
+    { no: 12, bulan: "Desember",  dpp: 336553992, ppn: 37020940, bruto: 373574931, ket: "Normal" }
+  ];
+
+  const totalDPP = salesData.reduce((acc, cur) => acc + cur.dpp, 0);
+  const totalPPN = salesData.reduce((acc, cur) => acc + cur.ppn, 0);
+  const totalBruto = salesData.reduce((acc, cur) => acc + cur.bruto, 0);
+
+  let feeBasis = "bruto";
+
+  function fmtRupiah(num) {
+    return "Rp " + Math.round(num).toLocaleString("id-ID");
+  }
+
+  function fmtJuta(num) {
+    if (Math.abs(num) >= 1e9) {
+      return "Rp " + (num / 1e9).toFixed(2).replace(".", ",") + " M";
+    }
+    return "Rp " + (num / 1e6).toFixed(1).replace(".", ",") + " Jt";
+  }
+
+  function switchTab(tabId) {
+    const tabs = ["dashboard", "neraca", "statement", "monthly", "simulator"];
+    tabs.forEach(t => {
+      const el = document.getElementById("tab-" + t);
+      if (el) el.style.display = (t === tabId) ? "block" : "none";
+    });
+    const btns = document.querySelectorAll(".tab-btn");
+    btns.forEach((btn, idx) => {
+      btn.classList.toggle("active", tabs[idx] === tabId);
+    });
+    if (tabId === "dashboard") {
+      drawCharts();
+    }
+  }
+
+  function setFeeBasis(basis) {
+    feeBasis = basis;
+    document.getElementById("basis-bruto").classList.toggle("active", basis === "bruto");
+    document.getElementById("basis-dpp").classList.toggle("active", basis === "dpp");
+    updateAll();
+  }
+
+  function resetDefaults() {
+    document.getElementById("input-margin").value = 24;
+    document.getElementById("input-mgmt-fee").value = 3.0;
+    document.getElementById("input-modal").value = 500;
+    document.getElementById("input-pajak").value = 0.5;
+    document.getElementById("input-gaji").value = 435.5;
+    document.getElementById("input-sewa").value = 120;
+    document.getElementById("input-utilitas").value = 60;
+    document.getElementById("input-maint").value = 25;
+    document.getElementById("input-depr").value = 37.5;
+    document.getElementById("input-adm").value = 18;
+    feeBasis = "bruto";
+    document.getElementById("basis-bruto").classList.add("active");
+    document.getElementById("basis-dpp").classList.remove("active");
+    updateAll();
+  }
+
+  function updateAll() {
+    const marginPct = parseFloat(document.getElementById("input-margin").value) / 100;
+    const feePct = parseFloat(document.getElementById("input-mgmt-fee").value) / 100;
+    const modalAwal = parseFloat(document.getElementById("input-modal").value) * 1e6;
+    const pajakRate = parseFloat(document.getElementById("input-pajak").value) / 100;
+
+    document.getElementById("val-margin").innerText = (marginPct * 100).toFixed(1) + "%";
+    document.getElementById("val-mgmt-fee").innerText = (feePct * 100).toFixed(1) + "%";
+    document.getElementById("val-modal").innerText = "Rp " + (modalAwal / 1e6).toFixed(0) + " Juta";
+    document.getElementById("val-pajak").innerText = (pajakRate * 100).toFixed(2) + "%";
+
+    const gaji = parseFloat(document.getElementById("input-gaji").value) * 1e6;
+    const sewa = parseFloat(document.getElementById("input-sewa").value) * 1e6;
+    const utilitas = parseFloat(document.getElementById("input-utilitas").value) * 1e6;
+    const maint = parseFloat(document.getElementById("input-maint").value) * 1e6;
+    const depr = parseFloat(document.getElementById("input-depr").value) * 1e6;
+    const adm = parseFloat(document.getElementById("input-adm").value) * 1e6;
+
+    document.getElementById("val-gaji").innerText = fmtJuta(gaji);
+    document.getElementById("val-sewa").innerText = fmtJuta(sewa);
+    document.getElementById("val-utilitas").innerText = fmtJuta(utilitas);
+    document.getElementById("val-maint").innerText = fmtJuta(maint);
+    document.getElementById("val-depr").innerText = fmtJuta(depr);
+    document.getElementById("val-adm").innerText = fmtJuta(adm);
+
+    // Perhitungan Laba Rugi
+    const totalHPP = totalDPP * (1 - marginPct);
+    const totalLabaKotor = totalDPP * marginPct;
+    const totalMgmtFee = (feeBasis === "bruto") ? (totalBruto * feePct) : (totalDPP * feePct);
+    const opexNonFee = gaji + sewa + utilitas + maint + depr + adm;
+    const totalOpex = opexNonFee + totalMgmtFee;
+
+    const ebit = totalLabaKotor - totalOpex;
+    const pph = totalDPP * pajakRate;
+    const eat = ebit - pph;
+
+    const roe = (eat / modalAwal) * 100;
+    const modalAkhir = modalAwal + eat;
+    const npm = (eat / totalDPP) * 100;
+
+    // Perhitungan Neraca (Balance Sheet)
+    // Liabilitas Tetap: Utang Usaha Astra Rp 180jt + Utang Pajak Rp 28,5jt + Beban Akrual Rp 16,5jt = Rp 225jt
+    const utangUsaha = 180000000;
+    const utangPajak = 28500000;
+    const utangBeban = 16500000;
+    const totalLiabilitas = utangUsaha + utangPajak + utangBeban;
+
+    const totalEkuitas = modalAkhir;
+    const totalPasiva = totalLiabilitas + totalEkuitas;
+
+    // Aset Tetap Bersih = Rp 210jt (Peralatan Rp 210jt + Renovasi Rp 75jt - Akumulasi Depresiasi Rp 75jt)
+    const asetTetapBersih = 210000000;
+    const piutangUsaha = 25000000;
+    const persediaanStok = 320000000;
+    const sewaDimuka = 40000000;
+    
+    // Kas Bank Operasional dinamis agar Neraca Selalu Seimbang (Aset = Pasiva)
+    const kasOperasional = totalPasiva - asetTetapBersih - piutangUsaha - persediaanStok - sewaDimuka;
+    const totalAsetLancar = kasOperasional + piutangUsaha + persediaanStok + sewaDimuka;
+    const totalAset = totalAsetLancar + asetTetapBersih;
+
+    // Update KPI Dashboard
+    document.getElementById("kpi-dpp").innerText = fmtJuta(totalDPP);
+    document.getElementById("kpi-bruto").innerText = fmtJuta(totalBruto);
+    document.getElementById("kpi-laba-kotor").innerText = fmtJuta(totalLabaKotor);
+    document.getElementById("kpi-margin-pct").innerText = (marginPct * 100).toFixed(2) + "%";
+    document.getElementById("kpi-mgmt-fee").innerText = fmtJuta(totalMgmtFee);
+    document.getElementById("kpi-fee-basis").innerText = (feeBasis === "bruto") ? "Gross Bruto" : "Gross DPP";
+    document.getElementById("kpi-laba-bersih").innerText = fmtJuta(eat);
+    document.getElementById("kpi-npm").innerText = npm.toFixed(2) + "%";
+    document.getElementById("kpi-roe").innerText = roe.toFixed(2) + "%";
+    document.getElementById("kpi-modal-awal").innerText = fmtJuta(modalAwal);
+    document.getElementById("kpi-modal-akhir").innerText = fmtJuta(modalAkhir);
+    document.getElementById("kpi-total-aset").innerText = fmtJuta(totalAset);
+    document.getElementById("kpi-modal-grow").innerText = (roe >= 0 ? "+" : "") + roe.toFixed(2) + "%";
+
+    // Update Tab Neraca
+    document.getElementById("neraca-kas").innerText = fmtRupiah(kasOperasional);
+    document.getElementById("neraca-total-al").innerText = fmtRupiah(totalAsetLancar);
+    document.getElementById("neraca-total-aset").innerText = fmtRupiah(totalAset);
+
+    document.getElementById("neraca-total-liabilitas").innerText = fmtRupiah(totalLiabilitas);
+    document.getElementById("neraca-modal-awal").innerText = fmtRupiah(modalAwal);
+    document.getElementById("neraca-laba-berjalan").innerText = (eat >= 0 ? "+ " : "- ") + fmtRupiah(Math.abs(eat));
+    document.getElementById("neraca-total-ekuitas").innerText = fmtRupiah(totalEkuitas);
+    document.getElementById("neraca-total-pasiva").innerText = fmtRupiah(totalPasiva);
+
+    // Rasio Neraca
+    const currentRatio = (totalAsetLancar / totalLiabilitas);
+    const der = (totalLiabilitas / totalEkuitas) * 100;
+    const roa = (eat / totalAset) * 100;
+    document.getElementById("rasio-cr").innerText = currentRatio.toFixed(2) + "x";
+    document.getElementById("rasio-der").innerText = der.toFixed(2) + "%";
+    document.getElementById("rasio-roa").innerText = roa.toFixed(2) + "%";
+
+    // Update Tabel Bulanan
+    const tbody = document.getElementById("monthly-table-body");
+    tbody.innerHTML = "";
+    let totFee = 0, totHpp = 0, totLk = 0, totLkStlFee = 0;
+
+    salesData.forEach(s => {
+      const hppM = s.dpp * (1 - marginPct);
+      const lkM = s.dpp * marginPct;
+      const feeM = (feeBasis === "bruto") ? (s.bruto * feePct) : (s.dpp * feePct);
+      const lkStlFeeM = lkM - feeM;
+
+      totFee += feeM; totHpp += hppM; totLk += lkM; totLkStlFee += lkStlFeeM;
+
+      let tagClass = "tag tag-normal";
+      if (s.ket === "Tertinggi") tagClass = "tag tag-peak";
+      if (s.ket === "Terendah") tagClass = "tag tag-low";
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="text-center">${s.no.toString().padStart(2, "0")}</td>
+        <td><strong>${s.bulan}</strong> 2025</td>
+        <td class="text-right">${fmtRupiah(s.dpp)}</td>
+        <td class="text-right" style="color:var(--gray-600);">${fmtRupiah(s.ppn)}</td>
+        <td class="text-right">${fmtRupiah(s.bruto)}</td>
+        <td class="text-right">${fmtRupiah(hppM)}</td>
+        <td class="text-right" style="color:var(--primary); font-weight:600;">${fmtRupiah(lkM)}</td>
+        <td class="text-right" style="color:var(--accent); font-weight:600;">${fmtRupiah(feeM)}</td>
+        <td class="text-right" style="font-weight:700;">${fmtRupiah(lkStlFeeM)}</td>
+        <td class="text-center"><span class="${tagClass}">${s.ket}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById("monthly-table-total").innerHTML = `
+      <td colspan="2" class="text-center">TOTAL (1 TAHUN)</td>
+      <td class="text-right">${fmtRupiah(totalDPP)}</td>
+      <td class="text-right">${fmtRupiah(totalPPN)}</td>
+      <td class="text-right">${fmtRupiah(totalBruto)}</td>
+      <td class="text-right">${fmtRupiah(totHpp)}</td>
+      <td class="text-right">${fmtRupiah(totLk)}</td>
+      <td class="text-right">${fmtRupiah(totFee)}</td>
+      <td class="text-right">${fmtRupiah(totLkStlFee)}</td>
+      <td class="text-center">—</td>
+    `;
+
+    // Update Format Cetak Laba Rugi
+    document.getElementById("st-bruto").innerText = fmtRupiah(totalBruto);
+    document.getElementById("st-ppn").innerText = "(" + fmtRupiah(totalPPN) + ")";
+    document.getElementById("st-dpp").innerText = fmtRupiah(totalDPP);
+    document.getElementById("st-hpp-pct").innerText = ((1 - marginPct) * 100).toFixed(2) + "%";
+    document.getElementById("st-hpp").innerText = "(" + fmtRupiah(totalHPP) + ")";
+    document.getElementById("st-margin-pct").innerText = (marginPct * 100).toFixed(2) + "%";
+    document.getElementById("st-laba-kotor").innerText = fmtRupiah(totalLabaKotor);
+
+    document.getElementById("st-fee-rate").innerText = (feePct * 100).toFixed(2) + "%";
+    document.getElementById("st-fee-src").innerText = (feeBasis === "bruto") ? "Gross Bruto" : "Gross DPP";
+    document.getElementById("st-fee").innerText = "(" + fmtRupiah(totalMgmtFee) + ")";
+    document.getElementById("st-gaji").innerText = "(" + fmtRupiah(gaji) + ")";
+    document.getElementById("st-sewa").innerText = "(" + fmtRupiah(sewa) + ")";
+    document.getElementById("st-utilitas").innerText = "(" + fmtRupiah(utilitas) + ")";
+    document.getElementById("st-maint").innerText = "(" + fmtRupiah(maint) + ")";
+    document.getElementById("st-depr").innerText = "(" + fmtRupiah(depr) + ")";
+    document.getElementById("st-adm").innerText = "(" + fmtRupiah(adm) + ")";
+    document.getElementById("st-total-opex").innerText = "(" + fmtRupiah(totalOpex) + ")";
+
+    document.getElementById("st-ebit").innerText = fmtRupiah(ebit);
+    document.getElementById("st-pajak-rate").innerText = (pajakRate * 100).toFixed(2) + "%";
+    document.getElementById("st-pajak").innerText = "(" + fmtRupiah(pph) + ")";
+    document.getElementById("st-eat").innerText = fmtRupiah(eat);
+
+    document.getElementById("st-modal-awal").innerText = fmtRupiah(modalAwal);
+    document.getElementById("st-modal-laba").innerText = (eat >= 0 ? "+ " : "- ") + fmtRupiah(Math.abs(eat));
+    document.getElementById("st-modal-akhir").innerText = fmtRupiah(modalAkhir);
+    document.getElementById("st-roe-pct").innerText = roe.toFixed(2) + "%";
+
+    drawCharts(marginPct, feePct, totalMgmtFee, opexNonFee, eat, totalHPP);
+  }
+
+  function drawCharts(marginPct = 0.24, feePct = 0.03, mgmtFee = 125776335, opex = 696000000, netProfit = 65834434, hpp = 2870571001) {
+    const svg = document.getElementById("monthly-chart");
+    if (!svg) return;
+    svg.innerHTML = "";
+
+    const paddingX = 40;
+    const paddingY = 30;
+    const width = 760;
+    const height = 240;
+    const chartW = width - paddingX * 2;
+    const chartH = height - paddingY * 2;
+    const maxVal = 420;
+
+    const colW = chartW / 12;
+    salesData.forEach((s, i) => {
+      const dppJt = s.dpp / 1e6;
+      const lkJt = (s.dpp * marginPct) / 1e6;
+      const x = paddingX + i * colW + colW * 0.15;
+      const barW = colW * 0.32;
+
+      const hDpp = (dppJt / maxVal) * chartH;
+      const yDpp = height - paddingY - hDpp;
+
+      const hLk = (lkJt / maxVal) * chartH;
+      const yLk = height - paddingY - hLk;
+
+      const rectDpp = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rectDpp.setAttribute("x", x);
+      rectDpp.setAttribute("y", yDpp);
+      rectDpp.setAttribute("width", barW);
+      rectDpp.setAttribute("height", hDpp);
+      rectDpp.setAttribute("fill", "#005691");
+      rectDpp.setAttribute("rx", "3");
+      svg.appendChild(rectDpp);
+
+      const rectLk = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rectLk.setAttribute("x", x + barW + 2);
+      rectLk.setAttribute("y", yLk);
+      rectLk.setAttribute("width", barW);
+      rectLk.setAttribute("height", hLk);
+      rectLk.setAttribute("fill", "#f26522");
+      rectLk.setAttribute("rx", "3");
+      svg.appendChild(rectLk);
+
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", x + barW);
+      text.setAttribute("y", height - 10);
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("font-size", "11");
+      text.setAttribute("fill", "#475569");
+      text.textContent = s.bulan.substring(0, 3);
+      svg.appendChild(text);
+    });
+
+    const baseLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    baseLine.setAttribute("x1", paddingX);
+    baseLine.setAttribute("y1", height - paddingY);
+    baseLine.setAttribute("x2", width - paddingX);
+    baseLine.setAttribute("y2", height - paddingY);
+    baseLine.setAttribute("stroke", "#cbd5e1");
+    baseLine.setAttribute("stroke-width", "1");
+    svg.appendChild(baseLine);
+
+    const donut = document.getElementById("donut-chart");
+    if (!donut) return;
+    donut.innerHTML = "";
+
+    const cx = 140, cy = 130, r = 85, strokeW = 42;
+    const dataPie = [
+      { label: "HPP (Spareparts & Oli)", val: hpp, color: "#64748b" },
+      { label: "Beban Operasional Bengkel", val: opex, color: "#0284c7" },
+      { label: "Management Fee (3%)", val: mgmtFee, color: "#f26522" },
+      { label: "Laba Bersih Bengkel", val: Math.max(0, netProfit), color: "#10b981" }
+    ];
+
+    const sumVal = dataPie.reduce((a, b) => a + b.val, 0);
+    let startAngle = 0;
+
+    dataPie.forEach(slice => {
+      const angle = (slice.val / sumVal) * Math.PI * 2;
+      const endAngle = startAngle + angle;
+
+      const x1 = cx + r * Math.cos(startAngle);
+      const y1 = cy + r * Math.sin(startAngle);
+      const x2 = cx + r * Math.cos(endAngle);
+      const y2 = cy + r * Math.sin(endAngle);
+
+      const largeArc = angle > Math.PI ? 1 : 0;
+      const pathData = `M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2}`;
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", pathData);
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", slice.color);
+      path.setAttribute("stroke-width", strokeW);
+      donut.appendChild(path);
+
+      startAngle = endAngle;
+    });
+
+    const legend = document.getElementById("revenue-legend");
+    legend.innerHTML = dataPie.map(p => `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="display:inline-flex; align-items:center; gap:6px;">
+          <span style="width:10px; height:10px; background:${p.color}; border-radius:2px; display:inline-block;"></span>
+          ${p.label}
+        </span>
+        <strong>${((p.val / sumVal) * 100).toFixed(1)}%</strong>
+      </div>
+    `).join("");
+  }
+
+  function exportToCSV() {
+    const marginPct = parseFloat(document.getElementById("input-margin").value) / 100;
+    const feePct = parseFloat(document.getElementById("input-mgmt-fee").value) / 100;
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "No,Bulan,Penjualan_DPP,PPN_11,Penjualan_Bruto,HPP,Laba_Kotor,Mgmt_Fee,Laba_Stl_Fee,Keterangan\n";
+
+    salesData.forEach(s => {
+      const hpp = Math.round(s.dpp * (1 - marginPct));
+      const lk = Math.round(s.dpp * marginPct);
+      const fee = Math.round((feeBasis === "bruto" ? s.bruto : s.dpp) * feePct);
+      const lkStl = lk - fee;
+      csvContent += `${s.no},${s.bulan} 2025,${s.dpp},${s.ppn},${s.bruto},${hpp},${lk},${fee},${lkStl},${s.ket}\n`;
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "Laporan_Laba_Rugi_Shop_and_Drive_2025.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  window.onload = function() {
+    updateAll();
+  };
+</script>
+
+</body>
+</html>
